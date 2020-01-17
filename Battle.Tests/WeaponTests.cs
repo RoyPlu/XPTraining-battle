@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Battle.Weapons;
+﻿using Battle.Weapons;
 using FluentAssertions;
 using Xunit;
 

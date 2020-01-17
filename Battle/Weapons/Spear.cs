@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Battle.Weapons
+﻿namespace Battle.Weapons
 {
     public class Spear:IWeapon
     {
