@@ -8,6 +8,7 @@ namespace Battle
         {
             ValidateNameisNotBlank(name);
             Name = name;
+            Weapon = WeaponType.BareFist;
         }
 
         private void ValidateNameisNotBlank(string name)
@@ -21,5 +22,6 @@ namespace Battle
         private bool IsBlank(string name) => string.IsNullOrEmpty(name?.Trim());
         
         public string Name { get; }
+        public WeaponType Weapon { get; }
     }
 }
