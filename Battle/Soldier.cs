@@ -31,6 +31,7 @@ namespace Battle
         
         public string Name { get; }
         public IWeapon Weapon { get; }
+        public Guid Id { get; private set; }
 
         public string Fight(Soldier defender)
         {
@@ -40,6 +41,15 @@ namespace Battle
             }
 
             return Weapon.Damage > defender.Weapon.Damage ? Name : defender.Name;
+        }
+
+        public void AssignId(Guid assignedId)
+        {
+            if (assignedId == Guid.Empty)
+            {
+                throw new ArgumentException();
+            }
+            Id = assignedId;
         }
     }
 }

@@ -6,8 +6,11 @@ namespace Battle
 {
     public class Army
     {
-        public Army(string name)
+        private readonly IHeadquarters _headquarters;
+
+        public Army(string name, IHeadquarters headquarters)
         {
+            _headquarters = headquarters;
             Name = name;
         }
 
@@ -17,12 +20,27 @@ namespace Battle
 
         public void Enlist(Soldier soldierToEnlist)
         {
+            var newSoldierId = _headquarters.ReportEnlistment(soldierToEnlist.Name);
+            AssignId(soldierToEnlist, newSoldierId);
+
             if (IsFirstEnlistedSoldier())
             {
                 FrontMan = soldierToEnlist;
             }
-
+            
             EnlistedSoldiers.Add(soldierToEnlist);
+        }
+
+        private void AssignId(Soldier soldierToEnlist, Guid soldierId)
+        {
+            var soldierWithSameIdEnlisted = EnlistedSoldiers.Any(s => s.Id.Equals(soldierId));
+            
+            if (soldierWithSameIdEnlisted)
+            {
+                throw new Exception();
+            }
+
+            soldierToEnlist.AssignId(soldierId);
         }
 
         private bool IsFirstEnlistedSoldier()

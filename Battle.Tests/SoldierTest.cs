@@ -16,6 +16,25 @@ namespace Battle.Tests
             soldier.Name.Should().Be("name");
         }
 
+        [Fact]
+        public void AssignId_GivenAValidId_ThenSoldierGetsAssignedGivenId()
+        {
+            var assignedId = Guid.NewGuid();
+            var soldier = new Soldier("name");
+            soldier.AssignId(assignedId);
+
+            soldier.Id.Should().Be(assignedId);
+        }
+
+        [Fact]
+        public void AssignId_GivenAnInValidId_ThenAnArgumentExceptionIsThrown()
+        {
+            var soldier = new Soldier("name");
+            Action assignId = () => soldier.AssignId(Guid.Empty);
+
+            assignId.Should().Throw<ArgumentException>();
+        }
+
         [Theory]
         [InlineData("")]
         [InlineData("        ")]
